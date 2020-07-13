@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div>
+        <form method="POST">
+            {% csrf_token %}
+                {{ form }}
+            <div>
+                <button type="submit">Login</button>
+            </div>
+        </form>
+        <div>
+            Need An Account? <a class="ml-2" href="{% url 'register' %}">Sign Up Now</a>
+        </div>
+    </div>
+
+</body>
+</html>
