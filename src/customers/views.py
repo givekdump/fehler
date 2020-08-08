@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from . forms import OrgCreationForm
 from . models import Organistion
-# Create your views here.
 
 
 def orgRegister(request):

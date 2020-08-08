@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
+
 from . forms import UserRegisterForm
 
 
@@ -21,3 +22,7 @@ def register(request):
 
 def profile(request):
     return render(request, 'accounts/profile.html')
+
+
+def home(request):
+    return render(request, 'accounts/home.html')

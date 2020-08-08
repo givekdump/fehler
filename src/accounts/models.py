@@ -6,7 +6,7 @@ from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.utils.translation import ugettext_lazy as _
 
-from .managers import UserManager
+from . managers import UserManager
 
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -20,6 +20,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
+    EMAIL_FIELD = 'email'
     REQUIRED_FIELDS = []
 
     class Meta:

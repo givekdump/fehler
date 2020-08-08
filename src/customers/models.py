@@ -1,8 +1,9 @@
 from django.db import models
 from django.utils import timezone
 from django.urls import reverse
-from PIL import Image
 from django.contrib.auth import get_user_model
+
+from PIL import Image
 
 
 class Organistion(models.Model):
@@ -26,7 +27,7 @@ class Profile(models.Model):
     is_admin = models.BooleanField(default=False)
 
     def __str__(self):
-        return f'{self.user.first_name} Profile'
+        return self.user.first_name
 
     def save(self):
         img = Image.open(self.image.path)
