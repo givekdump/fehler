@@ -1,14 +1,15 @@
 from django.db import models
 from django.utils import timezone
 from django.urls import reverse
-from django.contrib.auth import get_user_model
+# from django.contrib.auth import get_user_model
 
-from PIL import Image
+# from accounts.models import Invite
 
 
 class Organistion(models.Model):
     name = models.CharField(max_length=100)
-    owner = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
+    owner = models.OneToOneField('accounts.User', on_delete=models.CASCADE)
+    members = models.ManyToManyField('accounts.User', through='Membership', related_name='org_members')
     is_active = models.BooleanField(default=True)
     date_created = models.DateTimeField(default=timezone.now)
     
@@ -19,20 +20,9 @@ class Organistion(models.Model):
         super(Organistion, self).save(*args, **kwargs)
 
 
-class Profile(models.Model):
-    user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
-    organisation = models.ManyToManyField(Organistion)
-    #project = models.ManyToManyField(Project, blank=True)
-    image = models.ImageField(default='default.jpg', upload_to='profile_pics')
-    is_admin = models.BooleanField(default=False)
-
-    def __str__(self):
-        return self.user.first_name
-
-    def save(self):
-        img = Image.open(self.image.path)
-
-        if img.height > 300 or img.width > 300:
-            output_size = (300, 300)
-            img.thumbnail(output_size)
-            img.save(self.image.path)
+class Membership(models.Model):
+    user = models.ForeignKey('accounts.User', on_delete=models.CASCADE)
+    organisation = models.ForeignKey(Organistion, on_delete=models.CASCADE)
+    invite = models.ForeignKey('accounts.Invite', on_delete=models.CASCADE)
+    date_joined = models.DateField()
+    # invite_reason = models.CharField(max_length=64)

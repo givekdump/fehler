@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from . models import Profile, Organistion
+from . models import Organistion
 
 class OrgCreationForm(ModelForm):
     class Meta:

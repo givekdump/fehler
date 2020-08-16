@@ -120,12 +120,22 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-LOGIN_REDIRECT_URL = '/profile'
+
 AUTH_USER_MODEL = 'accounts.User'
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.RemoteUserBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = '587'
+EMAIL_HOST_USER = 'givektest@gmail.com'
+EMAIL_HOST_PASSWORD = 'givek#test123'
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+
+LOGIN_REDIRECT_URL = '/profile'
 
 STATIC_URL = '/static/'
